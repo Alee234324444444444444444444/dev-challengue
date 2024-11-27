@@ -63,7 +63,7 @@ body {
 
 .navbar-actions .login-btn:hover {
     background-color: #f7f5e8;
-    color: #5d6c67;
+    color: #0c3b2e;
 }
 
 /*-----------------------------------------------------*/
@@ -131,19 +131,13 @@ h1, h2, p {
     display: grid;
     grid-template-rows: 0.5fr 2fr 0.5fr;
     box-shadow: 0 0 0.2em 0.1em gray;
+    text-align: center;
 }
 
-/* Esto luego se elimina cuando ya se integre el personaje y las publicaciones */
 .ImageContent{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.ImageCaracter {
-    display: flex;
-    justify-content: center;
-    align-items: center;  
 }
 
 #post {
@@ -152,10 +146,29 @@ h1, h2, p {
     width: 25em;
 }
 
-.caracter img {
-    border-radius: 20px;
+Canvas {
+    border: 1px solid #0c3b2e;
+    padding-left: 8.1em;
+    padding-top: 2.3em;
+    width: 14em;
     height: 15em;
-    width: 15em;
+    margin: auto;
+    border-radius: 20px;
 }
 
-/* --------------------------------------------------------------------- */
+.actions button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #0c3b2e;
+    color: #f7f5e8;
+}
+
+.actions button:hover {
+    background-color: #f7f5e8;
+    color: #0c3b2e;
+}
+

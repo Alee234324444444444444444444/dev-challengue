@@ -1,7 +1,161 @@
 body {
-    background-color: cornsilk;
+    background-color: #f7f5e8;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
-    color: brown;
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5d6c67;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
 }
+
+/* Logo */
+.navbar-brand .logo {
+    font-size: 2em;
+    font-weight: bolder;
+    color: #80b08a;
+    text-decoration: none;
+}
+
+/* Enlaces */
+.navbar-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    margin: 0 10px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #f7f5e8;
+    font-size: 1em;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+    color: #80b08a;
+}
+
+/* Botón de acción */
+.navbar-actions .login-btn {
+    background-color: #0c3b2e;
+    color: #f7f5e8;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.navbar-actions .login-btn:hover {
+    background-color: #f7f5e8;
+    color: #5d6c67;
+}
+
+/*-----------------------------------------------------*/
+
+/* Encabezado */
+h1, h2, p {
+    color: #0c3b2e;
+    text-align: center;
+}
+
+/* Contenido */
+
+.container {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
+    margin: 2em;
+}
+
+.container .content {
+    background-color: #0c3b2e;
+    color: #f7f5e8;
+}
+
+.container .caracter {
+    background-color: #80b08a;
+}
+
+.content h1{
+    color: #f7f5e8;
+    font-weight: bolder;
+}
+
+.content p {
+    color: #f7f5e8;
+    font-weight: bold;
+}
+
+.caracter h1 {
+    color: #f7f5e8;
+    font-weight: bolder;
+}
+
+.caracter p{
+    color: #f7f5e8;
+    font-weight: bold;
+}
+
+.content {
+    border: 1px solid #5d6c67;
+    border-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 0.5fr 2fr 0.5fr;
+    box-shadow: 0 0 0.2em 0.1em gray;
+    color: #f7f5e8;
+}
+
+.caracter {
+    border: 1px solid #5d6c67;
+    border-radius: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 0.5fr 2fr 0.5fr;
+    box-shadow: 0 0 0.2em 0.1em gray;
+}
+
+/* Esto luego se elimina cuando ya se integre el personaje y las publicaciones */
+.ImageContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ImageCaracter {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+#post {
+    border-radius: 20px;
+    height: 25em;
+    width: 25em;
+}
+
+.caracter img {
+    border-radius: 20px;
+    height: 15em;
+    width: 15em;
+}
+
+/* --------------------------------------------------------------------- */

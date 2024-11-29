@@ -57,3 +57,43 @@ spriteSheet.onload = () => {
 spriteSheet.onerror = () => {
   console.error("Error: No se pudo cargar la hoja de sprites. Verifica la ruta.");
 };
+
+// Función para mostrar la alerta de "Completar Tarea"
+function completeTask() {
+  Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Deseas completar esta tarea?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, completar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+          confirmButton: 'btn-verde',  // Aplicar clase personalizada a todos los botones de confirmación
+      }
+  }).then((result) => {
+      if (result.isConfirmed) {
+          // Aquí puedes agregar la lógica para completar la tarea
+          Swal.fire('Tarea Completada', 'La tarea se ha completado exitosamente', 'success');
+      }
+  });
+}
+
+// Función para mostrar la alerta de "Equipar Recompensa"
+function equipReward() {
+  Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Deseas equipar la recompensa?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, equipar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+          confirmButton: 'btn-verde',  // Aplicar clase personalizada a todos los botones de confirmación
+      }
+  }).then((result) => {
+      if (result.isConfirmed) {
+          // Aquí puedes agregar la lógica para equipar la recompensa
+          Swal.fire('Recompensa Equipada', 'La recompensa ha sido equipada correctamente', 'success');
+      }
+  });
+}

@@ -284,3 +284,36 @@ Canvas {
 .foro {
     margin-top: 20px;
 }
+
+
+/* Clase personalizada para los botones de confirmación */
+.swal2-confirm.btn-verde {
+    background-color: #0c3b2e;  /* Color verde */
+    border-color: #28a745;      /* Color del borde */
+    color: white;               /* Color del texto */
+}
+
+/* Cambiar estilo del botón "Ok" (confirmar) en SweetAlert */
+.swal2-confirm {
+    background-color: #0c3b2e;  /* Color verde */
+    border-color: #28a745;      /* Color del borde */
+    color: white;               /* Color del texto */
+}
+
+.swal2-confirm:hover {
+    background-color: #f9f9f9;  /* Tono más claro al pasar el ratón */
+    border-color: #0c3b2e;      /* Borde más oscuro al pasar el ratón */
+    color: black;               /* Color del texto al pasar el ratón */
+}
+
+/* Asegurar que el botón de cancelación no se vea afectado */
+.swal2-cancel {
+    background-color: #d33;     /* Color rojo para el botón de cancelación */
+    border-color: #d33;         /* Borde rojo */
+    color: white;               /* Color blanco del texto */
+}
+
+.swal2-cancel:hover {
+    background-color: #a00;     /* Tono más oscuro para el hover */
+    border-color: #a00;         /* Borde más oscuro */
+}

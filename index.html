@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>op</title>
-    </head>
-    <body>
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="#" class="logo">OP</a>
-            </div>
-            <ul class="navbar-links">
-                <li><a href="#">Personajes</a></li>
-                <li><a href="#">Publicaciones</a></li>
-            </ul>
-            <div class="navbar-actions">
-                <button class="login-btn">INICIAR SESIÓN</button>
-            </div>
-        </nav>
-        <h1>Dev-challenge</h1>
-        <h2>Aquí va algún subtitulo o cosa así</h2>
-        <p>Se puede poner una descripción del proyecto o una imagen o algo así</p>
-        <div class="container">
-            <div class="content">
-                <h1>Desarrollar el contenido de la página, como las tareas y tal</h1>
-                <!-- Esto luego se elimina cuando ya se integren las publicaciones -->
-                <div class="ImageContent">
-                    <img id="post" src="https://i.pinimg.com/736x/e8/44/8b/e8448b0b89287db91df17f8f2090a368.jpg" alt="Publicación">
-                </div>
-                <!--  -->
-                <p>Aquí una breve descripción de algo</p>
-            </div>
-            <div class="caracter">
-                <h1>Personaje</h1>
-                <canvas id="pixelCanvas"></canvas>
-                <div class="actions">
-                    <button onclick="completeTask()">Completar Tarea</button>
-                    <button onclick="equipReward()">Equipar Recompensa</button>
-                </div>
-                <p>Nombre Personaje</p>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>OP</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="#" class="logo">OP</a>
         </div>
-        <script src="script.js"></script>
-    </body>
+        <ul class="navbar-links">
+            <li><a href="#">Personajes</a></li>
+            <li><a href="#publicaciones">Publicaciones</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <button class="login-btn">INICIAR SESIÓN</button>
+        </div>
+    </nav>
+    <h1>Dev-challenge</h1>
+    <h2>Aquí va algún subtitulo o cosa así</h2>
+    <p>Se puede poner una descripción del proyecto o una imagen o algo así</p>
+    <div class="container">
+        <div class="content">
+            <h1>Desarrollar el contenido de la página, como las tareas y tal</h1>
+            <div class="ImageContent">
+                <img id="post" src="https://i.pinimg.com/736x/e8/44/8b/e8448b0b89287db91df17f8f2090a368.jpg" alt="Publicación">
+            </div>
+            <p>Aquí una breve descripción de algo</p>
+        </div>
+        <div class="caracter">
+            <h1>Personaje</h1>
+            <!-- Lienzo del personaje -->
+            <canvas id="pixelCanvas"></canvas>
+            <div class="actions">
+                <button onclick="completeTask()">Completar Tarea</button>
+                <button onclick="equipReward()">Equipar Recompensa</button>
+            </div>
+            <p>Nombre Personaje</p>
+        </div>
+    </div>
+
+    <!-- Nueva sección: Publicaciones -->
+    <section id="publicaciones" class="publicaciones">
+        <h2>Publicaciones</h2>
+
+        <div class="foro">
+            <h3>Foro</h3>
+            <textarea placeholder="Escribe un comentario..." rows="4"></textarea>
+            <button class="btn-publicar">Publicar</button>
+            <ul class="comentarios">
+                <li>
+                    <div class="comentario-box">
+                        <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="comentario-img">
+                        <p class="comentario-username">Usuario 1:</p>
+                        <p>Este es un ejemplo de comentario con imagen de perfil.</p>
+                        <div class="comentario-capture">
+                            <img src="https://via.placeholder.com/400x200" alt="Captura publicada">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="comentario-box">
+                        <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="comentario-img">
+                        <p class="comentario-username">Usuario 2:</p>
+                        <p>Otro comentario con imagen de perfil simulada.</p>
+                        <div class="comentario-capture">
+                            <img src="https://via.placeholder.com/400x200" alt="Captura publicada">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
 </html>
+
+
+
+

@@ -2,13 +2,17 @@
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 
+// Obtener rutas de las imágenes desde los atributos del canvas
+const spriteSheetPath = canvas.getAttribute("data-sprite-sheet");
+const hatImagePath = canvas.getAttribute("data-hat");
+
 // Ajustar las dimensiones del canvas
 canvas.width = 256; // Tamaño del canvas
 canvas.height = 256;
 
 // Cargar la hoja de sprites
 const spriteSheet = new Image();
-spriteSheet.src = "./assets/character.png"; // Asegúrate de que esta ruta sea correcta
+spriteSheet.src = spriteSheetPath;
 
 // Configuración de la hoja de sprites
 const FRAME_WIDTH = 500; // Ancho de cada frame en la hoja de sprites
@@ -160,7 +164,7 @@ function completeChallenge(id, type) {
 // Equipar el sombrero como recompensa
 function equipHat() {
   const hat = new Image();
-  hat.src = "./assets/hat.png"; // Ruta al sprite del sombrero
+  hat.src = hatImagePath; // Ruta al sprite del sombrero
   hat.onload = () => {
       ctx.drawImage(hat, 50, 20, 150, 100); // Ajusta las coordenadas según el personaje
   };

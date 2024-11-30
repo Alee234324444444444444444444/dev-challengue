@@ -1,319 +1,285 @@
+/* Globales */
 body {
-    background-color: #f7f5e8;
-    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
-/* Barra de navegación */
+/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #5d6c67;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky; 
-    top: 0; 
-    z-index: 1000; 
+    background-color: #13547a;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand .logo img {
+    width: 60px;
+    height: 60px; /* Asegura que la altura sea igual al ancho */
+    border-radius: 50%; /* Hace que la imagen sea completamente redonda */
+    object-fit: cover; /* Asegura que la imagen se ajuste perfectamente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Añade una sombra elegante */
+    border: 2px solid #f0f4f8; /* Borde blanco para un efecto más limpio */
+}
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-/* Logo */
-.navbar-brand .logo {
-    font-size: 2em;
-    font-weight: bolder;
-    color: #80b08a;
-    text-decoration: none;
-}
 
-/* Enlaces */
-.navbar-links {
+.navbar-brand {
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    align-items: center;
 }
 
-.navbar-links li {
-    margin: 0 10px;
+
+.navbar-brand .brand-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f0f4f8;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
 }
 
 .navbar-links a {
+    color: #f0f4f8;
     text-decoration: none;
-    color: #f7f5e8;
-    font-size: 1em;
-    transition: color 0.3s;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .navbar-links a:hover {
-    color: #80b08a;
+    background-color: #80d0c7;
+    color: #13547a;
 }
 
-/* Botón de acción */
 .navbar-actions .login-btn {
-    background-color: #0c3b2e;
-    color: #f7f5e8;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
+    background-color: #80d0c7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1em;
     transition: background-color 0.3s;
 }
 
 .navbar-actions .login-btn:hover {
-    background-color: #f7f5e8;
-    color: #0c3b2e;
+    background-color: #13547a;
+    color: white;
 }
-
-/*-----------------------------------------------------*/
 
 /* Encabezado */
-h1, h2, p {
-    color: #0c3b2e;
+.header-content {
+    background-image: linear-gradient(to right, #80d0c7, #13547a);
+    color: white;
+    padding: 80px 20px;
     text-align: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenido */
-.container {
-    width: auto;
+.header-content h1 img {
+    max-width: 100%;
     height: auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 1em;
-    margin: 2em;
 }
 
-.container .content {
-    background-color: #0c3b2e;
-    color: #f7f5e8;
+.header-content h2 {
+    font-size: 1.8em;
+    margin-top: 20px;
 }
 
-.container .caracter {
-    background-color: #80b08a;
+.header-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
 }
 
-.content h1, .caracter h1 {
-    color: #f7f5e8;
-    font-weight: bolder;
+/* Contenedor de Desafíos */
+.challenges-container {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
 }
 
-.content p, .caracter p {
-    color: #f7f5e8;
-    font-weight: bold;
+.challenges-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.content, .caracter {
-    border: 1px solid #5d6c67;
-    border-radius: 20px;
-    padding: 10px;
-    display: grid;
-    grid-template-rows: 0.5fr 2fr 0.5fr;
-    box-shadow: 0 0 0.2em 0.1em gray;
-}
-
-.ImageContent {
+.challenges-container li {
+    background-color: #f0f4f8;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-#post {
-    border-radius: 20px;
-    height: 25em;
-    width: 25em;
+.challenges-container button {
+    background-color: #80d0c7;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-Canvas {
-    border: 1px solid #0c3b2e;
-    padding: 3em;
-    width: 14em;
-    height: 15em;
-    margin: auto;
+.challenges-container button:hover {
+    background-color: #13547a;
+}
+/*Personaje*/
+.caracter {
+    text-align: center;
+    margin: 20px auto;
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.caracter h1 {
+    font-size: 1.5em;
+    color: #13547a;
+    margin-bottom: 20px;
+}
+
+canvas {
+    border: 2px solid #13547a;
     border-radius: 20px;
+    background-color: #f0f4f8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    display: block;
+    width: 250px; /* Tamaño ajustado */
+    height: 250px;
 }
 
 .actions {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .actions button {
-    height: 3em;
-    margin: 5px;
-    padding: 10px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    background-color: #0c3b2e;
-    color: #f7f5e8;
-}
-
-.actions button:hover {
-    background-color: #f7f5e8;
-    color: #0c3b2e;
-}
-
-/* Nueva sección: Publicaciones */
-.publicaciones {
-    margin: 2em auto;
-    padding: 20px;
-    background-color: #f7f5e8;
-    border-radius: 15px;
-    text-align: center;
-}
-
-.publicaciones h2 {
-    color: #0c3b2e;
-}
-
-.fotos {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.fotos img {
-    border-radius: 10px;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-}
-
-.foro {
-    text-align: left;
-    margin: 0 auto;
-    width: 80%;
-    padding: 20px; /* Aumenta el padding para separar más el contenido */
-}
-
-
-.foro textarea {
-    width: 100%;
-    border: 1px solid #5d6c67;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 1em;
-}
-
-.foro .btn-publicar {
-    background-color: #0c3b2e;
-    color: #f7f5e8;
+    background-color: #80d0c7;
+    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s;
     font-size: 1em;
-    margin-top: 20px;  /* Incrementé el margen superior */
-    margin-bottom: 10px;  /* Agregué margen inferior para separarlo de otros elementos debajo */
-    margin-left: 10px;  /* Agregué margen izquierdo si es necesario */
-    margin-right: 10px; /* Agregué margen derecho si es necesario */
+}
+
+.actions button:hover {
+    background-color: #13547a;
+    color: white;
+}
+
+
+/* Foro */
+.foro {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.foro h3 {
+    text-align: center;
+    color: #13547a;
+    margin-bottom: 15px;
+}
+
+.foro-textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.btn-publicar {
+    background-color: #80d0c7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
     display: block;
+    margin: 0 auto;
     transition: background-color 0.3s;
 }
 
-
-.foro .btn-publicar:hover {
-    background-color: #f7f5e8; /* Añadí un cambio de fondo al hacer hover */
-    color: #0c3b2e; /* Cambié el color del texto al pasar el mouse */
+.btn-publicar:hover {
+    background-color: #13547a;
 }
 
-
+/* Comentarios */
 .comentarios {
-    margin-top: 30px;
-    list-style-type: none;
-    padding: 20px; /* Agregar espacio interno alrededor de la lista de comentarios */
-    margin: 0;
-    background-color: #f1f1f1; /* Opcional: color de fondo para diferenciar la sección de comentarios */
-    border-radius: 8px; /* Opcional: bordes redondeados */
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
 }
 
-
-.comentarios li {
+.comentario-item {
     margin-bottom: 20px;
 }
 
 .comentario-box {
     display: flex;
-    align-items: center;
-    border: 4px solid #0c3b2e; /* Hacer el borde más grueso */
-    border-radius: 5px;
-    padding: 15px; /* Aumentar el padding para más espacio dentro de cada comentario */
-    background-color: #f9f9f9;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 
 .comentario-img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    margin-bottom: 10px;
 }
 
-.comentario-box p {
-    margin: 0;
-    font-size: 14px;
-    color: #333;
+.comentario-content {
+    flex: 1;
 }
 
 .comentario-username {
     font-weight: bold;
-    color: #28a745;
+    color: #13547a;
+    margin-bottom: 5px;
 }
 
-.comentario-capture {
-    margin-top: 10px;
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-
-.comentario-capture img {
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.foro {
-    margin-top: 20px;
-}
-
-
-/* Clase personalizada para los botones de confirmación */
-.swal2-confirm.btn-verde {
-    background-color: #0c3b2e;  /* Color verde */
-    border-color: #28a745;      /* Color del borde */
-    color: white;               /* Color del texto */
-}
-
-/* Cambiar estilo del botón "Ok" (confirmar) en SweetAlert */
-.swal2-confirm {
-    background-color: #0c3b2e;  /* Color verde */
-    border-color: #28a745;      /* Color del borde */
-    color: white;               /* Color del texto */
-}
-
-.swal2-confirm:hover {
-    background-color: #f9f9f9;  /* Tono más claro al pasar el ratón */
-    border-color: #0c3b2e;      /* Borde más oscuro al pasar el ratón */
-    color: black;               /* Color del texto al pasar el ratón */
-}
-
-/* Asegurar que el botón de cancelación no se vea afectado */
-.swal2-cancel {
-    background-color: #d33;     /* Color rojo para el botón de cancelación */
-    border-color: #d33;         /* Borde rojo */
-    color: white;               /* Color blanco del texto */
-}
-
-.swal2-cancel:hover {
-    background-color: #a00;     /* Tono más oscuro para el hover */
-    border-color: #a00;         /* Borde más oscuro */
+.comentario-box p {
+    margin: 0;
+    font-size: 0.95em;
+    color: #333;
 }

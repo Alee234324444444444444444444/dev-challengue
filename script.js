@@ -97,3 +97,77 @@ function equipReward() {
       }
   });
 }
+// Listas de desafíos
+const dailyChallenges = [
+  { id: 1, text: "Reciclar una botella", completed: false },
+  { id: 2, text: "Apagar las luces de una habitación vacía", completed: false },
+  { id: 3, text: "Usar menos agua al lavar los platos", completed: false },
+];
+
+const weeklyChallenges = [
+  { id: 1, text: "Plantar un árbol", completed: false },
+  { id: 2, text: "Recoger basura en un parque", completed: false },
+  { id: 3, text: "Hacer composta con residuos orgánicos", completed: false },
+];
+
+// Elementos del DOM
+const dailyChallengeList = document.getElementById("daily-challenge-list");
+const weeklyChallengeList = document.getElementById("weekly-challenge-list");
+
+// Renderizar desafíos en la página
+function renderChallenges(challenges, container) {
+  container.innerHTML = ""; // Limpia la lista
+  challenges.forEach((challenge) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+          <span>${challenge.text}</span>
+          <button onclick="completeChallenge(${challenge.id}, '${container.id}')">
+              Completar
+          </button>
+      `;
+      container.appendChild(li);
+  });
+}
+
+// Marcar un desafío como completado
+function completeChallenge(id, type) {
+  let challenges;
+  if (type === "daily-challenge-list") {
+      challenges = dailyChallenges;
+  } else if (type === "weekly-challenge-list") {
+      challenges = weeklyChallenges;
+  }
+
+  const challenge = challenges.find((c) => c.id === id);
+  if (challenge && !challenge.completed) {
+      challenge.completed = true;
+      Swal.fire({
+          title: "¡Desafío Completado!",
+          text: "¡Buen trabajo cuidando el planeta!",
+          icon: "success",
+      });
+
+      // Si es un desafío diario, equipar el sombrero
+      if (type === "daily-challenge-list") {
+          equipHat();
+      }
+
+      // Renderizar la lista actualizada
+      renderChallenges(challenges, type === "daily-challenge-list" ? dailyChallengeList : weeklyChallengeList);
+  }
+}
+
+// Equipar el sombrero como recompensa
+function equipHat() {
+  const hat = new Image();
+  hat.src = "./assets/hat.png"; // Ruta al sprite del sombrero
+  hat.onload = () => {
+      ctx.drawImage(hat, 50, 20, 150, 100); // Ajusta las coordenadas según el personaje
+  };
+}
+
+// Renderizar las listas de desafíos al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  renderChallenges(dailyChallenges, dailyChallengeList);
+  renderChallenges(weeklyChallenges, weeklyChallengeList);
+});

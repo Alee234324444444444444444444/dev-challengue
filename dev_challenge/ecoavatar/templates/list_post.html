@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiProyecto</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" />
+  </head>
+  <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="#" class="logo">
+          <img src="{% static 'ecoavatar/images/logo.png' %}" alt="logo" />
+        </a>
+      </div>
+      <ul class="navbar-links">
+        {% if user.is_authenticated %}
+        <li><a href="{% url "ecoavatar:index" %}">Inicio</a></li>
+        <li><a href="#">Publicaciones</a></li>
+        <li><a href="#challenges">Desafíos</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button class="login-btn" href="{% url "logout" %}">Cerrar Sesión</button>
+      </div>
+      {% else %}
+      <div class="navbar-actions">
+        <button class="login-btn" href="{% url "ecoavatar:login" %}">Iniciar Sesión</button>
+      </div>
+      {% endif %}
+
+    </nav>
+
+    <!-- Encabezado -->
+    <div class="header-content">
+      <h1>¡Bienvenido a nuestro mundo!</h1>
+      <h2>
+        Explora y participa en desafíos que cuidan el planeta. ¡Haz tu impacto
+        positivo!
+      </h2>
+    </div>
+
+    <!-- Seccion de publicaciones -->
+     <div class="op">
+        {% for post in posts %}
+        <div class="op-container">
+            <div class="op-post1">
+                <p>Darle vida nuevamente</p>
+            </div>
+            <div class="op-post2"> 
+                <p>Hacer algo útil</p>
+            </div>
+        </div>
+        {% endfor %} 
+     </div>
+
+    <script src="{% static 'ecoavatar/js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>

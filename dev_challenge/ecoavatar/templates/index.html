@@ -22,7 +22,7 @@
       <ul class="navbar-links">
         {% if user.is_authenticated %}
         <li><a href="#">Inicio</a></li>
-        <li><a href="#publicaciones">Publicaciones</a></li>
+        <li><a href="{% url "ecoavatar:list_post" %}">Publicaciones</a></li>
         <li><a href="#challenges">Desafíos</a></li>
       </ul>
       <div class="navbar-actions">
@@ -38,48 +38,72 @@
 
     <!-- Encabezado -->
     <div class="header-content">
-      <h1>
-        <img src="{% static 'ecoavatar/images/portada.png' %}" alt="Portada" />
-      </h1>
-      <h2>¡Bienvenido a nuestro mundo!</h2>
-      <p>
+      <h1>¡Bienvenido a nuestro mundo!</h1>
+      <h2>
         Explora y participa en desafíos que cuidan el planeta. ¡Haz tu impacto
         positivo!
-      </p>
+      </h2>
     </div>
 
-    {% if user.is_authenticated %}
-    <!-- Sección de Desafíos -->
-    <section id="challenges" class="challenges-container">
-      <h2>Desafíos Activos</h2>
-      <ul id="daily-challenge-list">
-        <li>Reciclar una botella <button>Completar</button></li>
-        <li>Apagar las luces <button>Completar</button></li>
-      </ul>
-      <ul id="weekly-challenge-list">
-        <li>Plantar un árbol <button>Completar</button></li>
-        <li>Hacer composta <button>Completar</button></li>
-      </ul>
-    </section>
+    <!-- Lienzo del personaje -->
     <div class="caracter">
       <h1>Personaje</h1>
-      <!-- Lienzo del personaje -->
       <canvas
         id="pixelCanvas"
         data-sprite-sheet="{% static 'ecoavatar/images/character.png' %}"
         data-hat="{% static 'ecoavatar/images/hat.png' %}"
       ></canvas>
       <div class="actions">
-        <button onclick="completeTask()">Completar Tarea</button>
+        {% comment %} <button href="#challenges">Completar Tarea</button> {% endcomment %}
         <button onclick="equipReward()">Equipar Recompensa</button>
       </div>
       <p>Nombre Personaje</p>
     </div>
 
+    <!-- Modal de Desafíos -->
+    <div id="challengeModal" class="modal">
+      <div class="modal-content">
+        <h2>Completar Desafío</h2>
+        <form id="challengeForm" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input 
+            type="file" 
+            name="photo" 
+            id="challengePhoto" 
+            accept="image/*" 
+            required
+          >
+          <textarea 
+            name="description" 
+            id="challengeDescription" 
+            placeholder="Describe cómo completaste el desafío" 
+            rows="4" 
+            maxlength="75" 
+            required
+          ></textarea>
+          <div class="modal-buttons">
+            <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
+            <button type="submit" class="btn-publish" onclick="completeChallenge()">Publicar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sección de Desafíos -->
+    <section id="challenges" class="challenges-container">
+      <h2>Desafíos Activos</h2>
+      <ul>
+        <li>Reciclar una botella <button onclick="openChallengeModal('Reciclar una botella')">Completar</button></li>
+        <li>Apagar las luces <button onclick="openChallengeModal('Apagar las luces')">Completar</button></li>
+      </ul>
+      <ul>
+        <li>Plantar un árbol <button onclick="openChallengeModal('Plantar un árbol')">Completar</button></li>
+        <li>Hacer composta <button onclick="openChallengeModal('Hacer composta')">Completar</button></li>
+      </ul>
+    </section>
+
     <!-- Sección de Publicaciones -->
     <section id="publicaciones" class="publicaciones">
-      <h2>Publicaciones</h2>
-
       <div class="foro">
         <h3>Foro de Discusión</h3>
         <textarea
@@ -117,7 +141,6 @@
             </div>
           </li>
         </ul>
-        {% endif %}
       </div>
     </section>
     <script src="{% static 'ecoavatar/js/script.js' %}"></script>

@@ -1,7 +1,8 @@
 /* Globales */
 body {
-    background-color: #f0f4f8;
+    background-color: #f4f0e5;
     font-family: 'Poppins', sans-serif;
+    font-weight:600;
     margin: 0;
     padding: 0;
     color: #333;
@@ -12,7 +13,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #13547a;
+    background-color: #151d26;
     padding: 10px 20px;
     position: sticky;
     top: 0;
@@ -20,12 +21,11 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .navbar-brand .logo img {
-    width: 60px;
-    height: 60px; /* Asegura que la altura sea igual al ancho */
-    border-radius: 50%; /* Hace que la imagen sea completamente redonda */
-    object-fit: cover; /* Asegura que la imagen se ajuste perfectamente */
+    width: 80px;
+    height: 55px; /* Asegura que la altura sea igual al ancho */
+    border-radius: 15px; /* Hace que la imagen sea completamente redonda */
+    object-fit: fill; /* Asegura que la imagen se ajuste perfectamente */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Añade una sombra elegante */
-    border: 2px solid #f0f4f8; /* Borde blanco para un efecto más limpio */
 }
 /* Animación */
 @keyframes fadeIn {
@@ -46,7 +46,7 @@ body {
 
 .navbar-brand .brand-name {
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: bolder;
     color: #f0f4f8;
 }
 
@@ -59,44 +59,45 @@ body {
 .navbar-links a {
     color: #f0f4f8;
     text-decoration: none;
+    font-weight: bold;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.3s;
 }
 
 .navbar-links a:hover {
-    background-color: #80d0c7;
-    color: #13547a;
+    background-color: #426a8c;
 }
 
 .navbar-actions .login-btn {
-    background-color: #80d0c7;
+    background-color: #81231e;
     color: white;
+    font-size: 1.2em;
+    font-weight: bold;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: none;
 }
 
 .navbar-actions .login-btn:hover {
-    background-color: #13547a;
-    color: white;
+    background-color: #a66414;
 }
 
 /* Encabezado */
 .header-content {
-    background-image: linear-gradient(to right, #80d0c7, #13547a);
     color: white;
-    padding: 80px 20px;
+    height: 25em;
+    padding-top: 10em;
     text-align: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.header-content h1 img {
-    max-width: 100%;
-    height: auto;
+    background-image: url('https://i.pinimg.com/originals/41/60/61/416061b9d95e206d7bbeb51e644cca6e.gif');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 .header-content h2 {
@@ -113,7 +114,8 @@ body {
 .challenges-container {
     margin: 30px auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #2d4459;
+    color: #f0f4f8;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -127,32 +129,35 @@ body {
 }
 
 .challenges-container li {
-    background-color: #f0f4f8;
+    background-color: #426a8c;
     margin: 10px 0;
     padding: 15px;
     border-radius: 10px;
+    border: 1px solid #f9fafb;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .challenges-container button {
-    background-color: #80d0c7;
+    background-color: #a66414;
     color: white;
+    font-weight: 600;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .challenges-container button:hover {
-    background-color: #13547a;
+    background-color: #81231e;
 }
 /*Personaje*/
 .caracter {
     text-align: center;
     margin: 20px auto;
-    background-color: #f9fafb;
+    background-color: #594b39;
+    color: #f4f0e5;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -161,18 +166,18 @@ body {
 
 .caracter h1 {
     font-size: 1.5em;
-    color: #13547a;
+    color: #f4f0e5;
     margin-bottom: 20px;
 }
 
 canvas {
-    border: 2px solid #13547a;
-    border-radius: 20px;
-    background-color: #f0f4f8;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* border: 2px solid #403939; */
+    border-radius: 10px;
+    background-color: #594b39;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
     margin: 20px auto;
     display: block;
-    width: 250px; /* Tamaño ajustado */
+    width: 250px; 
     height: 250px;
 }
 
@@ -184,9 +189,9 @@ canvas {
 }
 
 .actions button {
-    background-color: #80d0c7;
+    background-color: #81231e;
     color: white;
-    border: none;
+    font-weight: 600;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
@@ -195,14 +200,14 @@ canvas {
 }
 
 .actions button:hover {
-    background-color: #13547a;
+    background-color: #a66414;
     color: white;
 }
 
 
 /* Foro */
 .foro {
-    background-color: #ffffff;
+    background-color: #151d26;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -213,22 +218,25 @@ canvas {
 
 .foro h3 {
     text-align: center;
-    color: #13547a;
+    color: #f9fafb;
     margin-bottom: 15px;
 }
 
 .foro-textarea {
     width: 100%;
-    border: 1px solid #d1d5db;
+    color: #f9fafb;
+    background-color: #304d73;
+    border: 1px solid #f9fafb;
     border-radius: 10px;
-    padding: 15px;
     font-size: 1em;
+    padding: 2px;
     margin-bottom: 15px;
 }
 
 .btn-publicar {
-    background-color: #80d0c7;
+    background-color: #81231e;
     color: white;
+    font-weight: 600;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
@@ -238,7 +246,7 @@ canvas {
 }
 
 .btn-publicar:hover {
-    background-color: #13547a;
+    background-color: #a66414;
 }
 
 /* Comentarios */
@@ -256,7 +264,7 @@ canvas {
     display: flex;
     gap: 15px;
     padding: 15px;
-    background-color: #f9fafb;
+    background-color: #304d73;
     border: 1px solid #d1d5db;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -274,12 +282,125 @@ canvas {
 
 .comentario-username {
     font-weight: bold;
-    color: #13547a;
+    color: #f9fafb;
     margin-bottom: 5px;
 }
 
 .comentario-box p {
     margin: 0;
     font-size: 0.95em;
-    color: #333;
+    color: #fefefe;
+}
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+    background-color: #151d26;
+    border: 1px solid #f9fafb;
+    color: #f9fafb;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .modal-content input[type="file"],
+  .modal-content textarea {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #f9fafb;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: #304d73;
+    color: #f9fafb;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-publish {
+    background-color: #81231e;
+    color: white;
+  }
+
+  .btn-publish:hover{
+    background-color: #a66414;
+  }
+
+  .btn-cancel {
+    background-color: #a66414;
+    color: white;
+  }
+
+  .btn-cancel:hover{
+    background-color: #81231e;
+  }
+
+/* publicaciones */
+.op {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+} 
+
+.op-container {
+    display: grid;
+    padding: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: #151d26;
+}
+
+.op-container .op-post1 {
+    display: grid;
+    border-radius: 10px;
+    color: #f9fafb;
+    height: 15em;
+    width: 15em;
+    padding: 2px;
+    background-image: url("https://i.pinimg.com/736x/8a/98/73/8a9873bd783d6b66ab77c0c3ee1350b4.jpg");
+    background-size: contain;
+    display: flex;
+    align-items: flex-end;
+}
+
+.op-container .op-post2 {
+    display: grid;
+    border-radius: 10px;
+    color: #f9fafb;
+    height: 15em;
+    width: 15em;
+    padding: 2px;
+    background-image: url("https://i.pinimg.com/736x/77/48/73/774873bc2f469a99f8909854fc2b404f.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+
 }

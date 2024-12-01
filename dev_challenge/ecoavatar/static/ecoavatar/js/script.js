@@ -1,3 +1,26 @@
+// Manejo del Modal y Desafíos
+let currentChallenge = '';
+
+function openChallengeModal(challenge) {
+    console.log('Abriendo modal para desafío:', challenge);
+    currentChallenge = challenge;
+    const modal = document.getElementById('challengeModal');
+    if (modal) {
+        modal.style.display = 'block';
+    } else {
+        console.error('No se encontró el elemento del modal');
+    }
+}
+
+function closeModal() {
+    console.log('Cerrando modal');
+    const modal = document.getElementById('challengeModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+    document.getElementById('challengeForm').reset();
+}
+
 // Seleccionar el canvas
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");

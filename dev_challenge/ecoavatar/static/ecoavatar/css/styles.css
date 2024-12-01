@@ -385,7 +385,7 @@ canvas {
     height: 15em;
     width: 15em;
     padding: 2px;
-    background-image: url("https://i.pinimg.com/736x/8a/98/73/8a9873bd783d6b66ab77c0c3ee1350b4.jpg");
+    background-image: url('{{ post.photo.url }}');
     background-size: contain;
     display: flex;
     align-items: flex-end;

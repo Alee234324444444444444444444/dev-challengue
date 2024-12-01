@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .models import User, Post
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-from ecoavatar.forms import UserForm
+from ecoavatar.forms import UserForm, PostForm
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
@@ -22,7 +22,6 @@ def list_post(request):
     template = loader.get_template('list_post.html')
     return HttpResponse(template.render({'posts':posts}, request))    
 
-@login_required
 def add_post(request):
     if request.method == 'POST':
         photo = request.FILES.get('photo')
@@ -30,8 +29,12 @@ def add_post(request):
 
         if photo and description:
             try:
+                # Asegurarse de que 'request.user' sea una instancia de 'User'
+                user_instance = User.objects.get(id=request.user.id)  # Obtener usuario explícitamente
+
+                # Crear la publicación asociada al usuario autenticado
                 Post.objects.create(
-                    user=request.user, 
+                    user=user_instance,  # Asignar la instancia del usuario correctamente
                     photo=photo, 
                     description=description
                 )
@@ -54,5 +57,4 @@ def add_post(request):
         'status': 'error', 
         'message': 'Método no permitido'
     }, status=405)
-
 

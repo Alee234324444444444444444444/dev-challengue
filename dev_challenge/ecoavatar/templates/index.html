@@ -13,23 +13,24 @@
   </head>
   <style>
 
-.foro {
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Espacio entre los elementos */
-}
+  .foro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los elementos */
+    margin-bottom: 3em;
+  }
 
-.foto-perfil {
-  margin-bottom: 10px; /* Espacio debajo del input de archivo */
-}
+  .foto-perfil {
+    margin-bottom: 10px; /* Espacio debajo del input de archivo */
+  }
 
-.foro-textarea {
-  margin-bottom: 10px; /* Espacio debajo del textarea */
-}
+  .foro-textarea {
+    margin-bottom: 10px; /* Espacio debajo del textarea */
+  }
 
-.btn-publicar {
-  margin-top: 10px; /* Espacio encima del botón de publicar */
-}
+  .btn-publicar {
+    margin-top: 10px; /* Espacio encima del botón de publicar */
+  }
 
   </style>
   <body>
@@ -85,7 +86,7 @@
     <div id="challengeModal" class="modal">
       <div class="modal-content">
         <h2>Completar Desafío</h2>
-        <form id="challengeForm" enctype="multipart/form-data">
+        <form id="challengeForm" action="{% url 'ecoavatar:add_post' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <input 
             type="file" 
@@ -104,7 +105,7 @@
           ></textarea>
           <div class="modal-buttons">
             <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
-            <button type="submit" class="btn-publish" onclick="completeChallenge()">Publicar</button>
+            <button type="submit" class="btn-publish">Publicar</button>
           </div>
         </form>
       </div>
@@ -217,6 +218,61 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
   </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("challengeForm");
+  
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Evitar la recarga de la página
+        
+        const formData = new FormData(form); // Capturar los datos del formulario
+  
+        fetch("{% url 'ecoavatar:add_post' %}", {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-CSRFToken": formData.get("csrfmiddlewaretoken"), // Token CSRF
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              Swal.fire({
+                icon: "success",
+                title: "Publicado",
+                text: data.message,
+              }).then(() => {
+                form.reset(); // Limpiar el formulario
+                closeModal(); // Cerrar el modal
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: data.message,
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Algo salió mal. Intenta de nuevo.",
+            });
+          });
+      });
+    });
+  
+    // Función para cerrar el modal
+    function closeModal() {
+      const modal = document.getElementById("challengeModal");
+      modal.style.display = "none";
+    }
+  </script>
+  
+
+
 </html>

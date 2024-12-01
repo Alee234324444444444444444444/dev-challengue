@@ -11,6 +11,27 @@
     />
     <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" />
   </head>
+  <style>
+
+.foro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+.foto-perfil {
+  margin-bottom: 10px; /* Espacio debajo del input de archivo */
+}
+
+.foro-textarea {
+  margin-bottom: 10px; /* Espacio debajo del textarea */
+}
+
+.btn-publicar {
+  margin-top: 10px; /* Espacio encima del botón de publicar */
+}
+
+  </style>
   <body>
     <!-- Barra de navegación -->
     <nav class="navbar">
@@ -106,44 +127,96 @@
     <section id="publicaciones" class="publicaciones">
       <div class="foro">
         <h3>Foro de Discusión</h3>
+        <input type="file" id="foto-perfil" accept="image/*" class="foto-perfil">
         <textarea
           class="foro-textarea"
           placeholder="Escribe un comentario..."
           rows="4"
         ></textarea>
         <button class="btn-publicar">Publicar</button>
-
+    
         <ul class="comentarios">
-          <li class="comentario-item">
-            <div class="comentario-box">
-              <img
-                src="https://img.freepik.com/vector-premium/imagen-perfil-avatar-hombre-aislada-fondo-imagen-profil-avatar-hombre_1293239-4867.jpg?w=740"
-                alt="Foto de perfil"
-                class="comentario-img"
-              />
-              <div class="comentario-content">
-                <p class="comentario-username">Usuario 1:</p>
-                <p>Este es un ejemplo de comentario con imagen de perfil.</p>
-              </div>
-            </div>
-          </li>
-          <li class="comentario-item">
-            <div class="comentario-box">
-              <img
-                src="https://cdn.icon-icons.com/icons2/2859/PNG/512/avatar_face_girl_female_woman_profile_smiley_happy_people_icon_181665.png"
-                alt="Foto de perfil"
-                class="comentario-img"
-              />
-              <div class="comentario-content">
-                <p class="comentario-username">Usuario 2:</p>
-                <p>Otro comentario con imagen de perfil simulada.</p>
-              </div>
-            </div>
-          </li>
+          <!-- Comentarios se agregarán aquí -->
         </ul>
       </div>
     </section>
+    
+    
     <script src="{% static 'ecoavatar/js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
   </body>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const fotoInput = document.getElementById("foto-perfil");
+  const textarea = document.querySelector(".foro-textarea");
+  const publicarButton = document.querySelector(".btn-publicar");
+  const comentariosList = document.querySelector(".comentarios");
+
+  publicarButton.addEventListener("click", () => {
+    const comentarioTexto = textarea.value.trim();
+
+    if (comentarioTexto === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Comentario vacío",
+        text: "Por favor, escribe algo antes de publicar.",
+      });
+      return;
+    }
+
+    let fotoURL = "https://via.placeholder.com/50"; // Imagen predeterminada
+    if (fotoInput.files && fotoInput.files[0]) {
+      const file = fotoInput.files[0];
+      fotoURL = URL.createObjectURL(file); // Crear una URL temporal para la imagen
+    }
+
+    // Crear el elemento de comentario
+    const comentarioItem = document.createElement("li");
+    comentarioItem.className = "comentario-item";
+
+    const comentarioBox = document.createElement("div");
+    comentarioBox.className = "comentario-box";
+
+    const comentarioImg = document.createElement("img");
+    comentarioImg.className = "comentario-img";
+    comentarioImg.src = fotoURL;
+    comentarioImg.alt = "Foto de perfil";
+
+    const comentarioContent = document.createElement("div");
+    comentarioContent.className = "comentario-content";
+
+    const comentarioUsername = document.createElement("p");
+    comentarioUsername.className = "comentario-username";
+    comentarioUsername.textContent = "Usuario Anónimo:";
+
+    const comentarioTextoElemento = document.createElement("p");
+    comentarioTextoElemento.textContent = comentarioTexto;
+
+    // Ensamblar el comentario
+    comentarioContent.appendChild(comentarioUsername);
+    comentarioContent.appendChild(comentarioTextoElemento);
+    comentarioBox.appendChild(comentarioImg);
+    comentarioBox.appendChild(comentarioContent);
+    comentarioItem.appendChild(comentarioBox);
+
+    // Agregar el comentario a la lista
+    comentariosList.appendChild(comentarioItem);
+
+    // Limpiar el textarea y el input de foto
+    textarea.value = "";
+    fotoInput.value = "";
+
+    // Notificación de éxito
+    Swal.fire({
+      icon: "success",
+      title: "Publicado",
+      text: "Tu comentario se ha publicado exitosamente.",
+    });
+  });
+});
+
+
+  </script>
 </html>

@@ -198,3 +198,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderChallenges(dailyChallenges, dailyChallengeList);
   renderChallenges(weeklyChallenges, weeklyChallengeList);
 });
+
+function openChallengeModal(titulo) {
+  document.getElementById('modalChallengeTitle').innerText = titulo;
+  // Aquí puedes agregar la lógica para abrir un modal o hacer alguna otra acción
+  document.getElementById('challengeModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('challengeModal').style.display = 'none';
+}

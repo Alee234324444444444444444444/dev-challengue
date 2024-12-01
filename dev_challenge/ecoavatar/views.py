@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import User, Post
+from .models import User, Post, Desafio
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from ecoavatar.forms import UserForm, PostForm
@@ -16,6 +16,18 @@ def index(request):
         'logged_in': request.user.is_authenticated
     }
     return render(request, 'index.html', context)
+
+def index(request):
+    # Obtener los desafíos no completados (tanto diarios como semanales)
+    desafios_diarios = Desafio.objects.filter(tipo='diario', completado=False)
+    desafios_semanales = Desafio.objects.filter(tipo='semanal', completado=False)
+
+    return render(request, 'index.html', {
+        'desafios_diarios': desafios_diarios,
+        'desafios_semanales': desafios_semanales,
+        'user': request.user,
+        'logged_in': request.user.is_authenticated
+    })
 
 def list_post(request):
     posts = Post.objects.order_by('description')

@@ -110,20 +110,35 @@
         </form>
       </div>
     </div>
-
-    <!-- Sección de Desafíos -->
+    <!-- Desafios-->
     <section id="challenges" class="challenges-container">
       <h2>Desafíos Activos</h2>
+  
+      <h3>Desafíos Diarios</h3>
       <ul>
-        <li>Reciclar una botella <button onclick="openChallengeModal('Reciclar una botella')">Completar</button></li>
-        <li>Apagar las luces <button onclick="openChallengeModal('Apagar las luces')">Completar</button></li>
+          {% for desafio in desafios_diarios %}
+          <li>
+              <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
+              <button onclick="openChallengeModal('{{ desafio.titulo }}')">Completar</button>
+          </li>
+          {% empty %}
+          <p>No hay desafíos diarios disponibles.</p>
+          {% endfor %}
       </ul>
+  
+      <h3>Desafíos Semanales</h3>
       <ul>
-        <li>Plantar un árbol <button onclick="openChallengeModal('Plantar un árbol')">Completar</button></li>
-        <li>Hacer composta <button onclick="openChallengeModal('Hacer composta')">Completar</button></li>
+          {% for desafio in desafios_semanales %}
+          <li>
+              <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
+              <button onclick="openChallengeModal('{{ desafio.titulo }}')">Completar</button>
+          </li>
+          {% empty %}
+          <p>No hay desafíos semanales disponibles.</p>
+          {% endfor %}
       </ul>
-    </section>
-
+  </section>
+  
     <!-- Sección de Publicaciones -->
     <section id="publicaciones" class="publicaciones">
       <div class="foro">

@@ -3,7 +3,7 @@ El objetivo de este proyecto es ...
 
 ## Nombres de los integrantes
 
-John San Martin - José Luis Chávez - Alejandro Barrionuevo
+Alejandro Barrionuevo - John San Martin - José Luis Chávez 
 
 ## Objetivos 
 

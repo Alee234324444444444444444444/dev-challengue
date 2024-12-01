@@ -22,10 +22,10 @@ body {
 }
 .navbar-brand .logo img {
     width: 80px;
-    height: 55px; /* Asegura que la altura sea igual al ancho */
-    border-radius: 15px; /* Hace que la imagen sea completamente redonda */
-    object-fit: fill; /* Asegura que la imagen se ajuste perfectamente */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Añade una sombra elegante */
+    height: 55px; 
+    border-radius: 15px; 
+    object-fit: fill; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /
 }
 /* Animación */
 @keyframes fadeIn {
@@ -385,22 +385,10 @@ canvas {
     height: 15em;
     width: 15em;
     padding: 2px;
-    background-image: url('{{ post.photo.url }}');
-    background-size: contain;
+    background-size: fill;
+    background-position: center;
     display: flex;
     align-items: flex-end;
+    background-repeat: no-repeat;
 }
 
-.op-container .op-post2 {
-    display: grid;
-    border-radius: 10px;
-    color: #f9fafb;
-    height: 15em;
-    width: 15em;
-    padding: 2px;
-    background-image: url("https://i.pinimg.com/736x/77/48/73/774873bc2f469a99f8909854fc2b404f.jpg");
-    background-size: cover;
-    display: flex;
-    align-items: flex-end;
-
-}

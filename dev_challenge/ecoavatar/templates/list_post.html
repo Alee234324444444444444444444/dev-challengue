@@ -50,10 +50,7 @@
         {% for post in posts %}
         <div class="op-container">
             <div class="op-post1" style="background-image: url('{{ post.photo.url }}')">
-                <p>Darle vida nuevamente: {{ post.description }}</p>
-            </div>
-            <div class="op-post2"> 
-                <p>Hacer algo útil</p>
+                <p>{{ post.description }}</p>
             </div>
         </div>
         {% endfor %} 

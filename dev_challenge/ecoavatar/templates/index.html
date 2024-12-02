@@ -28,7 +28,7 @@
         </a>
       </div>
       <ul class="navbar-links">
-        {% if user.is_authenticated %}
+        <!-- {% if user.is_authenticated %} -->
         <li><a href="#">Inicio</a></li>
         <li><a href="{% url "ecoavatar:list_post" %}">Publicaciones</a></li>
         <li><a href="#challenges">Desafíos</a></li>
@@ -36,11 +36,11 @@
       <div class="navbar-actions">
         <button class="login-btn" href="{% url "logout" %}">Cerrar Sesión</button>
       </div>
-      {% else %}
+      <!-- {% else %} -->
       <div class="navbar-actions">
         <button class="login-btn" href="{% url "ecoavatar:login" %}">Iniciar Sesión</button>
       </div>
-      {% endif %}
+      <!-- {% endif %} -->
 
     </nav>
 

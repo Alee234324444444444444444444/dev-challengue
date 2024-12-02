@@ -1,5 +1,5 @@
 # Dev Challenge
-El objetivo de este proyecto es ...
+El objetivo de este proyecto es ayudar al medio ambiente, cre
 
 ## Nombres de los integrantes
 

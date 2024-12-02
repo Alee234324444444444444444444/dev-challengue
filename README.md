@@ -1,31 +1,12 @@
 # Dev Challenge
-El objetivo de este proyecto es ayudar al medio ambiente, cre
+Ecoavatar va sobre un personaje virtual que trata de cumplir desafíos en el mundo real, este mundo medieval se compone de retos donde nuestro personaje demuestra la importancia de cuidar el medioambiente. En este entorno, se desarrollan desafíos, diarios o semanales, que involucran recolección, reducción y reutilización, todo en la realidad, nuestra realidad, ¿serás capaz de cumplir el desafío?
 
 ## Nombres de los integrantes
 
 Alejandro Barrionuevo - John San Martin - José Luis Chávez 
 
 ## Objetivos 
-
-### 1. Reconocimiento y Aplicación de Conceptos Básicos de POO
-El estudiante debe demostrar su capacidad para reconocer y aplicar conceptos fundamentales del Paradigma Orientado a Objetos (POO) tales como clases, objetos, atributos y métodos.
-
-### 2. Desarrollo de Aplicaciones Web con Django
-Este proyecto servirá como una introducción al desarrollo de aplicaciones web mediante el uso de Django como framework. El estudiante debe ser capaz de utilizar modelos en Django para reforzar sus conocimientos sobre POO y el manejo de bases de datos relacionales.
-
-### 3. Diseño de Interfaces Gráficas Web
-El estudiante debe ser capaz de desarrollar interfaces gráficas web utilizando HTML y CSS, mostrando un entendimiento sólido de cómo construir y estilizar páginas web de manera efectiva.
-
-
-## Requerimientos
-Programación II
-En cuanto al programa deberá estar desarrollado en Django, HTML, CSS y Javascript, y todos los módulos deberán estar implementar programación Orientada a objetos. Se debe también recordar que el programa debe estar implementado sobre un modelo vista controlador.
-
-Requerimientos:
-· El programa debe manejar login de usuarios.
-
-
- 
+Este proyecto está enfocado en el tema principal del Challenge, basándose en la sostenibilidad y el medioambiente; en cómo podemos aportar para reducir nuestra huella de carbono. La aplicación web se basa de recompensa, donde el usuario cumple los retos a través de un formulario donde registra sus pruebas, tanto una foto como una descripción de como llevó a cabo el reto; al llenar el formulario, estas pruebas se mostrarán en el apartado correspondiente a las publicaciones del usuario. También, se dispondrá de un foro donde todos podrán comentar, preguntar o responder sobre diferentes temas relacionados a los desafíos de la aplicación web. Todo esto tiene una finalidad, ya que cada usuario cuenta con un personaje base, el cual, mediante los retos cumplidos, obtienen recompensas, que serán accesorios para el personaje, además, de ayudar al medioambiente y ser conscientes de nuestro impacto como individuos.
 
 ## Instalación del ambiente
 

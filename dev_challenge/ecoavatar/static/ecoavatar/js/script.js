@@ -1,210 +1,270 @@
-// Manejo del Modal y Desafíos
-let currentChallenge = '';
 
-function openChallengeModal(challenge) {
-    console.log('Abriendo modal para desafío:', challenge);
-    currentChallenge = challenge;
-    const modal = document.getElementById('challengeModal');
-    if (modal) {
-        modal.style.display = 'block';
-    } else {
-        console.error('No se encontró el elemento del modal');
-    }
-}
-
-function closeModal() {
-    console.log('Cerrando modal');
-    const modal = document.getElementById('challengeModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-    document.getElementById('challengeForm').reset();
-}
-
-// Seleccionar el canvas
+// Configuración inicial del canvas
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 
-// Obtener rutas de las imágenes desde los atributos del canvas
+// Obtener las rutas de la hoja de sprites y el sombrero desde los atributos del canvas
 const spriteSheetPath = canvas.getAttribute("data-sprite-sheet");
 const hatImagePath = canvas.getAttribute("data-hat");
 
-// Ajustar las dimensiones del canvas
-canvas.width = 256; // Tamaño del canvas
-canvas.height = 256;
-
-// Cargar la hoja de sprites
+// Cargar la hoja de sprites y el sombrero
 const spriteSheet = new Image();
+const hatImage = new Image();
 spriteSheet.src = spriteSheetPath;
+hatImage.src = hatImagePath;
 
-// Configuración de la hoja de sprites
-const FRAME_WIDTH = 500; // Ancho de cada frame en la hoja de sprites
-const FRAME_HEIGHT = 500; // Alto de cada frame en la hoja de sprites
-let currentFrame = 0; // Frame actual que se está mostrando
-const totalFrames = 2; // Total de frames (ajusta este número si tienes más frames)
-let frameCounter = 0; // Contador para el cambio de frame
-const frameSpeed = 120; // Controla la velocidad de la animación (más alto = más lenta)
+// Configuración de la animación del personaje
+const FRAME_WIDTH = 500; 
+const FRAME_HEIGHT = 500;
+let currentFrame = 0;
+const totalFrames = 2; // Cambiar si hay más frames en la hoja de sprites
+let frameCounter = 0;
+const frameSpeed = 120;
 
-// Dibujar el frame actual desde la hoja de sprites 
-function drawFrame() {
-  // Limpiar el canvas
+let isHatEquipped = false;
+// Dibujar el personaje desde la hoja de sprites
+function drawCharacter() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const sx = currentFrame * FRAME_WIDTH; 
-  const sy = 0; 
 
-  // Dibujar el frame en el canvas
+  const sx = currentFrame * FRAME_WIDTH;
+  const sy = 0;
+
   ctx.drawImage(
-    spriteSheet, // Imagen de la hoja de sprites
-    sx, sy, // Coordenadas del frame en la hoja
-    FRAME_WIDTH, FRAME_HEIGHT, // Dimensiones del frame original
-    0, 0, // Posición en el canvas
-    canvas.width, canvas.height // Dimensiones escaladas en el canvas
+      spriteSheet,
+      sx, sy,
+      FRAME_WIDTH, FRAME_HEIGHT,
+      0, 0,
+      canvas.width, canvas.height
   );
 
-  // Cambiar de frame después de algunos ciclos
   frameCounter++;
   if (frameCounter >= frameSpeed) {
-    currentFrame = (currentFrame + 1) % totalFrames; // Pasar al siguiente frame
-    frameCounter = 0; // Reiniciar el contador
+      currentFrame = (currentFrame + 1) % totalFrames;
+      frameCounter = 0;
+  }
+
+  // Si el sombrero está equipado, dibujarlo después del personaje
+  if (isHatEquipped) {
+      drawHat();
   }
 }
+// Dibujar el sombrero sobre el personaje
+function drawHat() {
+  const hatX = 50; // Posición X del sombrero
+  const hatY = 1; // Posición Y del sombrero
+  const hatWidth = 200; // Ancho del sombrero
+  const hatHeight = 150; // Alto del sombrero
+  
+  ctx.drawImage(hatImage, hatX, hatY, hatWidth, hatHeight); // Dibujar el sombrero
 
-// Loop de animación
+}
+
+// Loop de animación para el personaje
 function animationLoop() {
-  drawFrame(); // Dibujar el frame actual
-  requestAnimationFrame(animationLoop); // Repetir en el siguiente ciclo
+    drawCharacter();
+    requestAnimationFrame(animationLoop);
+}
+
+/// Equipar el sombrero al personaje
+function equipReward() {
+  hatImage.onload = function () {
+      isHatEquipped = true; // Activar la bandera
+      
+      // Alert animado usando SweetAlert2
+      Swal.fire({
+          title: "¡Sombrero equipado!",
+          text: "Tu personaje ahora luce más elegante.",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+          toast: true,
+          position: 'top-end',
+          customClass: {
+              popup: 'animate__animated animate__bounceIn'
+          }
+      });
+  };
+
+  hatImage.onerror = function () {
+      console.error("Error: No se pudo cargar la imagen del sombrero.");
+      
+      // Alert de error usando SweetAlert2
+      Swal.fire({
+          title: "Error",
+          text: "No se pudo equipar el sombrero.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+          toast: true,
+          position: 'top-end',
+          customClass: {
+              popup: 'animate__animated animate__shakeX'
+          }
+      });
+  };
+
+  hatImage.src = hatImagePath;
 }
 
 // Iniciar la animación cuando la hoja de sprites esté cargada
 spriteSheet.onload = () => {
-  animationLoop();
+    animationLoop();
 };
 
-// Depurar si la hoja de sprites no carga
 spriteSheet.onerror = () => {
-  console.error("Error: No se pudo cargar la hoja de sprites. Verifica la ruta.");
+    console.error("Error: No se pudo cargar la hoja de sprites.");
 };
 
-// Función para mostrar la alerta de "Completar Tarea"
-function completeTask() {
-  Swal.fire({
-      title: '¿Estás seguro?',
-      text: "¿Deseas completar esta tarea?",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, completar',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-          confirmButton: 'btn-verde',  // Aplicar clase personalizada a todos los botones de confirmación
-      }
-  }).then((result) => {
-      if (result.isConfirmed) {
-          // Aquí puedes agregar la lógica para completar la tarea
-          Swal.fire('Tarea Completada', 'La tarea se ha completado exitosamente', 'success');
-      }
-  });
-}
-
-// Función para mostrar la alerta de "Equipar Recompensa"
-function equipReward() {
-  Swal.fire({
-      title: '¿Estás seguro?',
-      text: "¿Deseas equipar la recompensa?",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, equipar',
-      cancelButtonText: 'Cancelar',
-      customClass: {
-          confirmButton: 'btn-verde',  // Aplicar clase personalizada a todos los botones de confirmación
-      }
-  }).then((result) => {
-      if (result.isConfirmed) {
-          // Aquí puedes agregar la lógica para equipar la recompensa
-          Swal.fire('Recompensa Equipada', 'La recompensa ha sido equipada correctamente', 'success');
-      }
-  });
-}
-// Listas de desafíos
-const dailyChallenges = [
-  { id: 1, text: "Reciclar una botella", completed: false },
-  { id: 2, text: "Apagar las luces de una habitación vacía", completed: false },
-  { id: 3, text: "Usar menos agua al lavar los platos", completed: false },
-];
-
-const weeklyChallenges = [
-  { id: 1, text: "Plantar un árbol", completed: false },
-  { id: 2, text: "Recoger basura en un parque", completed: false },
-  { id: 3, text: "Hacer composta con residuos orgánicos", completed: false },
-];
-
-// Elementos del DOM
-const dailyChallengeList = document.getElementById("daily-challenge-list");
-const weeklyChallengeList = document.getElementById("weekly-challenge-list");
-
-// Renderizar desafíos en la página
-function renderChallenges(challenges, container) {
-  container.innerHTML = ""; // Limpia la lista
-  challenges.forEach((challenge) => {
-      const li = document.createElement("li");
-      li.innerHTML = `
-          <span>${challenge.text}</span>
-          <button onclick="completeChallenge(${challenge.id}, '${container.id}')">
-              Completar
-          </button>
-      `;
-      container.appendChild(li);
-  });
-}
-
-// Marcar un desafío como completado
-function completeChallenge(id, type) {
-  let challenges;
-  if (type === "daily-challenge-list") {
-      challenges = dailyChallenges;
-  } else if (type === "weekly-challenge-list") {
-      challenges = weeklyChallenges;
-  }
-
-  const challenge = challenges.find((c) => c.id === id);
-  if (challenge && !challenge.completed) {
-      challenge.completed = true;
-      Swal.fire({
-          title: "¡Desafío Completado!",
-          text: "¡Buen trabajo cuidando el planeta!",
-          icon: "success",
-      });
-
-      // Si es un desafío diario, equipar el sombrero
-      if (type === "daily-challenge-list") {
-          equipHat();
-      }
-
-      // Renderizar la lista actualizada
-      renderChallenges(challenges, type === "daily-challenge-list" ? dailyChallengeList : weeklyChallengeList);
-  }
-}
-
-// Equipar el sombrero como recompensa
-function equipHat() {
-  const hat = new Image();
-  hat.src = hatImagePath; // Ruta al sprite del sombrero
-  hat.onload = () => {
-      ctx.drawImage(hat, 50, 20, 150, 100); // Ajusta las coordenadas según el personaje
-  };
-}
-
-// Renderizar las listas de desafíos al cargar la página
+// Asociar el evento "Equipar Recompensa" al botón
 document.addEventListener("DOMContentLoaded", () => {
-  renderChallenges(dailyChallenges, dailyChallengeList);
-  renderChallenges(weeklyChallenges, weeklyChallengeList);
+    const equipButton = document.querySelector(".equipar-btn");
+    equipButton.addEventListener("click", equipReward);
 });
 
-function openChallengeModal(titulo) {
-  document.getElementById('modalChallengeTitle').innerText = titulo;
-  // Aquí puedes agregar la lógica para abrir un modal o hacer alguna otra acción
-  document.getElementById('challengeModal').style.display = 'flex';
+// Función para abrir el modal al hacer clic en "Completar"
+function openChallengeModal(button) {
+    const desafioId = button.getAttribute('data-desafio-id');
+
+    document.getElementById('challengeModal').style.display = 'flex';
+
+    document.getElementById('challengeForm').onsubmit = function (event) {
+        event.preventDefault();
+
+        let formData = new FormData();
+        formData.append('photo', document.getElementById('challengePhoto').files[0]);
+        formData.append('description', document.getElementById('challengeDescription').value);
+
+        fetch(`/ecoavatar/completar_desafio/${desafioId}/`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('¡Desafío completado!');
+                closeModal();
+                document.getElementById('rewardMessage').style.display = 'block';
+                document.getElementById('rewardImage').src = data.recompensa_imagen_url;
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    };
 }
 
+// Función para cerrar el modal
 function closeModal() {
-  document.getElementById('challengeModal').style.display = 'none';
+  const modal = document.getElementById('challengeModal');
+  modal.style.display = 'none'; // Cerrar el modal cambiando su estilo a 'none'
 }
+
+// Cuando se crea la publicación correctamente, redirigir a la lista de publicaciones
+document.getElementById('submitPost').addEventListener('click', function () {
+  const formData = new FormData(document.getElementById('challengeForm'));
+
+  // Usar la URL generada por Django en el HTML
+  fetch(addPostUrl, {
+      method: 'POST',
+      headers: {
+          'X-CSRFToken': '{{ csrf_token }}' // Asegúrate de que el CSRF token esté disponible en el HTML
+      },
+      body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.status === 'success') {
+        Swal.fire({
+          title: "¡Publicación creada exitosamente!",
+          text: "Gracias por tu contribución.",
+          icon: "success",
+          confirmButtonText: "OK",
+          timer: 2000,
+          showConfirmButton: false,
+          toast: true,
+          position: 'top-end'
+        });
+          closeModal(); // Cierra el modal
+          
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: data.message || "Algo salió mal al procesar la publicación.",
+          icon: "error",
+          confirmButtonText: "Intentar nuevamente"
+        });
+      }
+  })
+  .catch(error => console.error('Error:', error));
+});
+
+
+
+// Manejo de comentarios
+document.addEventListener("DOMContentLoaded", () => {
+    const fotoInput = document.getElementById("foto-perfil");
+    const textarea = document.querySelector(".foro-textarea");
+    const publicarButton = document.querySelector(".btn-publicar");
+    const comentariosList = document.querySelector(".comentarios");
+
+    publicarButton.addEventListener("click", () => {
+        const comentarioTexto = textarea.value.trim();
+
+        if (comentarioTexto === "") {
+            Swal.fire({
+                icon: "error",
+                title: "Comentario vacío",
+                text: "Por favor, escribe algo antes de publicar.",
+            });
+            return;
+        }
+
+        let fotoURL = "https://via.placeholder.com/50";
+        if (fotoInput.files && fotoInput.files[0]) {
+            const file = fotoInput.files[0];
+            fotoURL = URL.createObjectURL(file);
+        }
+
+        const comentarioItem = document.createElement("li");
+        comentarioItem.className = "comentario-item";
+
+        const comentarioBox = document.createElement("div");
+        comentarioBox.className = "comentario-box";
+
+        const comentarioImg = document.createElement("img");
+        comentarioImg.className = "comentario-img";
+        comentarioImg.src = fotoURL;
+        comentarioImg.alt = "Foto de perfil";
+
+        const comentarioContent = document.createElement("div");
+        comentarioContent.className = "comentario-content";
+
+        const comentarioUsername = document.createElement("p");
+        comentarioUsername.className = "comentario-username";
+        comentarioUsername.textContent = "Usuario Anónimo:";
+
+        const comentarioTextoElemento = document.createElement("p");
+        comentarioTextoElemento.textContent = comentarioTexto;
+
+        comentarioContent.appendChild(comentarioUsername);
+        comentarioContent.appendChild(comentarioTextoElemento);
+        comentarioBox.appendChild(comentarioImg);
+        comentarioBox.appendChild(comentarioContent);
+        comentarioItem.appendChild(comentarioBox);
+
+        comentariosList.appendChild(comentarioItem);
+
+        textarea.value = "";
+        fotoInput.value = "";
+
+        Swal.fire({
+            icon: "success",
+            title: "Publicado",
+            text: "Tu comentario se ha publicado exitosamente.",
+        });
+    });
+});
+

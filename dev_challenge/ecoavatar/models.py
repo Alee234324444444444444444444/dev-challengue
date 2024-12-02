@@ -36,3 +36,11 @@ class Recompensa(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+class Personaje(models.Model):
+    nombre = models.CharField(max_length=100)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='personajes')
+    recompensa = models.ManyToManyField('Recompensa', related_name='personajes', blank=True)  # Relación ManyToMany
+
+    def __str__(self):
+        return self.nombre

@@ -47,15 +47,18 @@
 
     <!-- Seccion de publicaciones -->
      <div class="op">
-        {% for post in posts %}
-        <div class="op-container">
-            <div class="op-post1" style="background-image: url('{{ post.photo.url }}')">
-                <p>{{ post.description }}</p>
-            </div>
+      {% for post in posts %}
+      <div class="op-container">
+        <div class="op-post1" style="background-image: url('{{ post.photo.url }}')">
+          <p>{{ post.description }}</p>
         </div>
-        {% endfor %} 
-     </div>
-
+        <p><small>Publicado por {{ post.user.username }} el {{ post.created_at|date:"d M Y H:i" }}</small></p>
+      </div>
+      {% empty %}
+      <p>No hay publicaciones todavía.</p>
+      {% endfor %}
+    </div>
+    
     <script src="{% static 'ecoavatar/js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>

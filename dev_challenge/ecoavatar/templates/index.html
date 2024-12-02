@@ -10,29 +10,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" />
+    <!-- Coloca esto dentro del bloque <script> en el archivo HTML -->
+      <script>
+        // Pasar las URLs de Django a variables JavaScript
+        const addPostUrl = "{% url 'ecoavatar:add_post' %}";
+    </script>
+    
+
   </head>
-  <style>
 
-  .foro {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Espacio entre los elementos */
-    margin-bottom: 3em;
-  }
-
-  .foto-perfil {
-    margin-bottom: 10px; /* Espacio debajo del input de archivo */
-  }
-
-  .foro-textarea {
-    margin-bottom: 10px; /* Espacio debajo del textarea */
-  }
-
-  .btn-publicar {
-    margin-top: 10px; /* Espacio encima del botón de publicar */
-  }
-
-  </style>
   <body>
     <!-- Barra de navegación -->
     <nav class="navbar">
@@ -69,7 +55,7 @@
 
     <!-- Lienzo del personaje -->
     <div class="caracter">
-      <h1>Personaje</h1>
+      <h1>Adán</h1>
       <canvas
         id="pixelCanvas"
         data-sprite-sheet="{% static 'ecoavatar/images/character.png' %}"
@@ -77,68 +63,70 @@
       ></canvas>
       <div class="actions">
         {% comment %} <button href="#challenges">Completar Tarea</button> {% endcomment %}
-        <button onclick="equipReward()">Equipar Recompensa</button>
-      </div>
-      <p>Nombre Personaje</p>
-    </div>
+        <!-- Botón Equipar Recompensa -->
+        <button 
+        class="equipar-btn" 
+        data-personaje-id="{{ personaje.id }}" 
+        data-recompensa-id="{{ recompensa.id }}" 
+        onclick="equipReward(this)"
+        >
+        Equipar Recompensa
+        </button>
 
-    <!-- Modal de Desafíos -->
+      </div>
+    </div>
+   
+    <!-- Modal para completar desafío -->
     <div id="challengeModal" class="modal">
       <div class="modal-content">
-        <h2>Completar Desafío</h2>
-        <form id="challengeForm" action="{% url 'ecoavatar:add_post' %}" method="POST" enctype="multipart/form-data">
+        <h2>¡Felicidades por completar el desafío!</h2>
+        <p>Sube una foto para demostrar que has completado el desafío.</p>
+    
+        <form id="challengeForm" enctype="multipart/form-data" action="{% url 'ecoavatar:add_post' %}" method="POST">
           {% csrf_token %}
-          <input 
-            type="file" 
-            name="photo" 
-            id="challengePhoto" 
-            accept="image/*" 
-            required
-          >
-          <textarea 
-            name="description" 
-            id="challengeDescription" 
-            placeholder="Describe cómo completaste el desafío" 
-            rows="4" 
-            maxlength="75" 
-            required
-          ></textarea>
-          <div class="modal-buttons">
-            <button type="button" class="btn-cancel" onclick="closeModal()">Cancelar</button>
-            <button type="submit" class="btn-publish">Publicar</button>
-          </div>
+          <input type="file" name="photo" id="challengePhoto" accept="image/*" required>
+          <textarea name="description" id="challengeDescription" placeholder="Describe cómo completaste el desafío" rows="4" maxlength="75" required></textarea>
         </form>
+    
+        <!-- Botones estilizados -->
+        <div class="modal-buttons">
+          <button type="button" id="submitPost" class="btn-submit">Subir Publicación</button>
+          <button type="button" class="btn-close" onclick="closeModal()">Cerrar</button>
+        </div>
       </div>
     </div>
-    <!-- Desafios-->
-    <section id="challenges" class="challenges-container">
-      <h2>Desafíos Activos</h2>
-  
-      <h3>Desafíos Diarios</h3>
-      <ul>
-          {% for desafio in desafios_diarios %}
-          <li>
-              <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
-              <button onclick="openChallengeModal('{{ desafio.titulo }}')">Completar</button>
-          </li>
-          {% empty %}
-          <p>No hay desafíos diarios disponibles.</p>
-          {% endfor %}
-      </ul>
-  
-      <h3>Desafíos Semanales</h3>
-      <ul>
-          {% for desafio in desafios_semanales %}
-          <li>
-              <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
-              <button onclick="openChallengeModal('{{ desafio.titulo }}')">Completar</button>
-          </li>
-          {% empty %}
-          <p>No hay desafíos semanales disponibles.</p>
-          {% endfor %}
-      </ul>
-  </section>
-  
+
+   <!-- Sección de Desafíos -->
+<section id="challenges" class="challenges-container">
+  <h2>Desafíos Activos</h2>
+
+  <h3>Desafíos Diarios</h3>
+  <ul>
+      {% for desafio in desafios_diarios %}
+      <li>
+          <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
+          <!-- Botón de completar desafío, pasamos el ID del desafío -->
+          <button class="completar-btn" data-desafio-id="{{ desafio.id }}" onclick="openChallengeModal(this)">Completar</button>
+      </li>
+      {% empty %}
+      <p>No hay desafíos diarios disponibles.</p>
+      {% endfor %}
+  </ul>
+
+  <h3>Desafíos Semanales</h3>
+  <ul>
+      {% for desafio in desafios_semanales %}
+      <li>
+          <strong>{{ desafio.titulo }}</strong>: {{ desafio.descripcion }}
+          <button class="completar-btn" data-desafio-id="{{ desafio.id }}" onclick="openChallengeModal(this)">Completar</button>
+      </li>
+      {% empty %}
+      <p>No hay desafíos semanales disponibles.</p>
+      {% endfor %}
+  </ul>
+</section>
+
+
     <!-- Sección de Publicaciones -->
     <section id="publicaciones" class="publicaciones">
       <div class="foro">
@@ -157,137 +145,12 @@
       </div>
     </section>
     
-    
+
+  
     <script src="{% static 'ecoavatar/js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
   </body>
-
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const fotoInput = document.getElementById("foto-perfil");
-  const textarea = document.querySelector(".foro-textarea");
-  const publicarButton = document.querySelector(".btn-publicar");
-  const comentariosList = document.querySelector(".comentarios");
-
-  publicarButton.addEventListener("click", () => {
-    const comentarioTexto = textarea.value.trim();
-
-    if (comentarioTexto === "") {
-      Swal.fire({
-        icon: "error",
-        title: "Comentario vacío",
-        text: "Por favor, escribe algo antes de publicar.",
-      });
-      return;
-    }
-
-    let fotoURL = "https://via.placeholder.com/50"; // Imagen predeterminada
-    if (fotoInput.files && fotoInput.files[0]) {
-      const file = fotoInput.files[0];
-      fotoURL = URL.createObjectURL(file); // Crear una URL temporal para la imagen
-    }
-
-    // Crear el elemento de comentario
-    const comentarioItem = document.createElement("li");
-    comentarioItem.className = "comentario-item";
-
-    const comentarioBox = document.createElement("div");
-    comentarioBox.className = "comentario-box";
-
-    const comentarioImg = document.createElement("img");
-    comentarioImg.className = "comentario-img";
-    comentarioImg.src = fotoURL;
-    comentarioImg.alt = "Foto de perfil";
-
-    const comentarioContent = document.createElement("div");
-    comentarioContent.className = "comentario-content";
-
-    const comentarioUsername = document.createElement("p");
-    comentarioUsername.className = "comentario-username";
-    comentarioUsername.textContent = "Usuario Anónimo:";
-
-    const comentarioTextoElemento = document.createElement("p");
-    comentarioTextoElemento.textContent = comentarioTexto;
-
-    // Ensamblar el comentario
-    comentarioContent.appendChild(comentarioUsername);
-    comentarioContent.appendChild(comentarioTextoElemento);
-    comentarioBox.appendChild(comentarioImg);
-    comentarioBox.appendChild(comentarioContent);
-    comentarioItem.appendChild(comentarioBox);
-
-    // Agregar el comentario a la lista
-    comentariosList.appendChild(comentarioItem);
-
-    // Limpiar el textarea y el input de foto
-    textarea.value = "";
-    fotoInput.value = "";
-
-    // Notificación de éxito
-    Swal.fire({
-      icon: "success",
-      title: "Publicado",
-      text: "Tu comentario se ha publicado exitosamente.",
-    });
-  });
-});
-
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("challengeForm");
   
-      form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Evitar la recarga de la página
-        
-        const formData = new FormData(form); // Capturar los datos del formulario
-  
-        fetch("{% url 'ecoavatar:add_post' %}", {
-          method: "POST",
-          body: formData,
-          headers: {
-            "X-CSRFToken": formData.get("csrfmiddlewaretoken"), // Token CSRF
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.status === "success") {
-              Swal.fire({
-                icon: "success",
-                title: "Publicado",
-                text: data.message,
-              }).then(() => {
-                form.reset(); // Limpiar el formulario
-                closeModal(); // Cerrar el modal
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: data.message,
-              });
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Algo salió mal. Intenta de nuevo.",
-            });
-          });
-      });
-    });
-  
-    // Función para cerrar el modal
-    function closeModal() {
-      const modal = document.getElementById("challengeModal");
-      modal.style.display = "none";
-    }
-  </script>
-  
-
 
 </html>

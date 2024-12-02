@@ -14,8 +14,10 @@ Este proyecto está enfocado en el tema principal del Challenge, basándose en l
 http://127.0.0.1:8000/login/
 ~~~
 - Se debe escribir en los campos de usuario y contraseña las siguientes credenciales:
-    Usuario: jose
-    Contraseña: jose
+~~~
+Usuario: jose
+Contraseña: jose
+~~~
 - Esto debido a que está en fase de desarrollo y no están completas todas las funcionalidades, una vez hecho esto ya podrá completar los desafíos y publicarlos.
 
 ## Instalación del ambiente

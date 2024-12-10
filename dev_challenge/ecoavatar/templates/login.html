@@ -10,6 +10,67 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" />
+    <style>
+      form {
+          background-color: #151d26; /* Fondo del formulario */
+          padding: 30px;
+          border-radius: 10px;
+          width: 100%;
+          max-width: 300px; /* Reduje el tamaño máximo del contenedor */
+          margin: auto;
+          display: flex;
+          flex-direction: column; /* Para que los elementos se dispongan de arriba hacia abajo */
+          align-items: center; /* Centra los elementos horizontalmente */
+      }
+    
+      /* Estilo para los inputs */
+      input {
+          background-color: #81231e; /* Rojo de llama */
+          color: white;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          width: 80%; /* Ajusté el tamaño al 80% */
+          margin-bottom: 15px;
+          text-align: center; 
+      }
+    
+      label {
+          color: white; /* Cambiar color de las etiquetas a blanco */
+          font-weight: 600; /* Hacer las etiquetas un poco más destacadas */
+          margin-bottom: 5px;
+          display: block;
+          text-align: center; /* Centra el texto de la etiqueta */
+      }
+    
+      button[type="submit"],
+      button[type="button"] {
+          background-color: #FF6A00; /* Rojo de llama */
+          color: white;
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          width: 100%; /* Ajustado al mismo ancho que los inputs */
+          cursor: pointer;
+          margin-top: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1em; /* Tamaño de fuente normal */
+      }
+    
+      button[type="submit"]:hover, 
+      button[type="button"]:hover {
+          background-color: #e65c00; /* Rojo más oscuro en hover */
+      }
+
+
+
+
+    </style>
+    
+    
+  
   </head>
   <body>
     <!-- Barra de navegación -->
@@ -31,9 +92,6 @@
 
     <!-- Encabezado -->
     <div class="header-content">
-      <h1>
-        <img src="{% static 'ecoavatar/images/portada.png' %}" alt="Portada" />
-      </h1>
       <h2>¡Bienvenido a nuestro mundo!</h2>
       <p>
         Explora y participa en desafíos que cuidan el planeta. ¡Haz tu impacto
@@ -42,20 +100,30 @@
     </div>
 
     <!-- Sección de Login -->
-    <form action="{% url "ecoavatar:login" %}" method="post">
-        {% csrf_token %}
-        <div>
-            <label for="username">Usuario:</label>
-            <input type="text" name="username" id="username" required></input>
-        </div>
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" id="password" required></input>
-        </div>
-        <button type="submit">Ingresar</button>
-        <button onclick="window.location.href='/'">Cancelar</button>
-    </form>
+    <div class="login-container">
+      <div class="login-box">
+        <h2 style="text-align: center; color: #151d26; margin-bottom: 20px; font-size: 40px;">Iniciar Sesión</h2>
+
+        <form action="{% url 'ecoavatar:login' %}" method="post">
+          {% csrf_token %}
+          <div class="input-group">
+            <label for="username"><big>Usuario:</big></label>
+            <input type="text" name="username" id="username" required />
+          </div>
+          <div class="input-group">
+            <label for="password"><big>Contraseña:</big></label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="submit-btn"><strong>Ingresar</strong></button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='/'"><strong>Cancelar</strong></button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="{% static 'ecoavatar/js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
+

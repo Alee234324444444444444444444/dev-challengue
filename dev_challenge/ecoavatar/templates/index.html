@@ -9,13 +9,18 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" /> 
     <!-- Coloca esto dentro del bloque <script> en el archivo HTML -->
       <script>
         // Pasar las URLs de Django a variables JavaScript
         const addPostUrl = "{% url 'ecoavatar:add_post' %}";
     </script>
-    
+    <style>
+      a {
+    text-decoration: none;      
+     }
+
+    </style> 
 
   </head>
 
@@ -28,21 +33,23 @@
         </a>
       </div>
       <ul class="navbar-links">
-        <!-- {% if user.is_authenticated %} -->
-        <li><a href="#">Inicio</a></li>
-        <li><a href="{% url "ecoavatar:list_post" %}">Publicaciones</a></li>
-        <li><a href="#challenges">Desafíos</a></li>
+        <!-- Redirigir a login si no está autenticado -->
+        <li><a href="{% url 'ecoavatar:index' %}" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Inicio</a></li>
+        <li><a href="{% url 'ecoavatar:list_post' %}" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Publicaciones</a></li>
+        <li><a href="#challenges" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Desafíos</a></li>
       </ul>
       <div class="navbar-actions">
-        <button class="login-btn" href="{% url "logout" %}">Cerrar Sesión</button>
+        {% if user.is_authenticated %}
+          <a class="login-btn" href="{% url 'ecoavatar:logout' %}">Cerrar Sesión</a>
+        {% else %}
+          <a class="login-btn" href="{% url 'ecoavatar:login' %}">Iniciar Sesión</a>
+        {% endif %}
       </div>
-      <!-- {% else %} -->
-      <div class="navbar-actions">
-        <button class="login-btn" href="{% url "ecoavatar:login" %}">Iniciar Sesión</button>
-      </div>
-      <!-- {% endif %} -->
-
     </nav>
+   
+    
+    
+    
 
     <!-- Encabezado -->
     <div class="header-content">
@@ -152,5 +159,11 @@
 
   </body>
   
-
+  <script>
+    function redirectToLogin(event) {
+        event.preventDefault(); // Evita la acción predeterminada del enlace
+        window.location.href = "{% url 'ecoavatar:login' %}"; // Redirige a la página de login
+    }
+ </script>
+ 
 </html>

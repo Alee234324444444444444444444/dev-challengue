@@ -8,6 +8,7 @@ from ecoavatar.forms import UserForm, PostForm
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
+    redirect_authenticated_user = True
     
 def index(request):
     personaje = Personaje.objects.first()  

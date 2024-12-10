@@ -5,8 +5,20 @@ Ecoavatar va sobre un personaje virtual que trata de cumplir desafíos en el mun
 
 Alejandro Barrionuevo - John San Martin - José Luis Chávez 
 
-## Objetivos 
-Este proyecto está enfocado en el tema principal del Challenge, basándose en la sostenibilidad y el medioambiente; en cómo podemos aportar para reducir nuestra huella de carbono. La aplicación web se basa de recompensa, donde el usuario cumple los retos a través de un formulario donde registra sus pruebas, tanto una foto como una descripción de como llevó a cabo el reto; al llenar el formulario, estas pruebas se mostrarán en el apartado correspondiente a las publicaciones del usuario. También, se dispondrá de un foro donde todos podrán comentar, preguntar o responder sobre diferentes temas relacionados a los desafíos de la aplicación web. Todo esto tiene una finalidad, ya que cada usuario cuenta con un personaje base, el cual, mediante los retos cumplidos, obtienen recompensas, que serán accesorios para el personaje, además, de ayudar al medioambiente y ser conscientes de nuestro impacto como individuos.
+## Objetivo
+Este proyecto está enfocado en el tema principal del Challenge, basándose en la sostenibilidad y el medioambiente; en cómo podemos aportar para reducir nuestra huella de carbono. La aplicación web se basa en un sistema de recompensas, donde el usuario cumple los retos a través de un formulario donde registra sus pruebas, tanto una foto como una descripción de como llevó a cabo el reto; al llenar el formulario, estas pruebas se mostrarán en el apartado correspondiente a las publicaciones del usuario. También, se dispondrá de un foro donde todos podrán comentar, preguntar o responder sobre diferentes temas relacionados a los desafíos presentados. Todo esto tiene una finalidad, ya que cada usuario cuenta con un personaje base, el cual, mediante los retos cumplidos, obtiene recompensas, que serán accesorios para el personaje, además, de ayudar al medioambiente y ser conscientes de nuestro impacto como individuos.
+
+## Especificaciones temporales
+- Para iniciar sesión debe dirigirse a este enlace en su navegador:
+~~~
+http://127.0.0.1:8000/login/
+~~~
+- Se debe escribir en los campos de usuario y contraseña las siguientes credenciales:
+~~~
+Usuario: jose
+Contraseña: jose
+~~~
+- Esto debido a que está en fase de desarrollo y no están completas todas las funcionalidades, una vez hecho esto ya podrá completar los desafíos y publicarlos.
 
 ## Instalación del ambiente
 

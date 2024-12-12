@@ -307,12 +307,13 @@ canvas {
   }
 
   .modal-content {
-    background-color: yellowgreen;
-    border: 1px solid red;
+    background-color: #151d26;
+    border: 1px solid #f9fafb;
     color: #f9fafb;
     margin: 15% auto;
     padding: 20px;
     border-radius: 10px;
+    height: 310px;
   }
 
   .modal-content input[type="file"],
@@ -355,7 +356,7 @@ canvas {
   }
   
   .modal-buttons .btn-submit {
-    background-color: #a66414; 
+    background-color: #304d73; 
     color: white;
   }
   

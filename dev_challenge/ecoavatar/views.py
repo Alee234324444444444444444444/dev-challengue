@@ -13,10 +13,11 @@ class CustomLoginView(LoginView):
 def index(request):
     personaje = Personaje.objects.first()  
     recompensas = Recompensa.objects.all()  
-
+    
     context = {
         'personaje': personaje,
         'recompensas': recompensas,
+        
     }
     return render(request, 'ecoavatar/index.html', context)
 def index(request):

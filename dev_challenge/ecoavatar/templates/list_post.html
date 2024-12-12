@@ -20,10 +20,10 @@
         </a>
       </div>
       <ul class="navbar-links">
-        {% if user.is_authenticated %}
         <li><a href="{% url "ecoavatar:index" %}">Inicio</a></li>
-        <li><a href="#">Publicaciones</a></li>
-        <li><a href="#challenges">Desafíos</a></li>
+        <li><a href="{% url "ecoavatar:list_post" %}">Publicaciones</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url "ecoavatar:index" %}">Desafíos</a></li>
       </ul>
       <div class="navbar-actions">
         <button class="login-btn" href="{% url "logout" %}">Cerrar Sesión</button>

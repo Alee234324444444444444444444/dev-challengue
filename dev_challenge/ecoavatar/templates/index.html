@@ -10,9 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'ecoavatar/css/styles.css' %}" /> 
-    <!-- Coloca esto dentro del bloque <script> en el archivo HTML -->
       <script>
-        // Pasar las URLs de Django a variables JavaScript
         const addPostUrl = "{% url 'ecoavatar:add_post' %}";
     </script>
     <style>
@@ -21,7 +19,6 @@
      }
 
     </style> 
-
   </head>
 
   <body>
@@ -35,7 +32,7 @@
       <ul class="navbar-links">
         <!-- Redirigir a login si no está autenticado -->
         <li><a href="{% url 'ecoavatar:index' %}" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Inicio</a></li>
-        <li><a href="{% url 'ecoavatar:list_post' %}" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Publicaciones</a></li>
+        <li><a href="{% url 'ecoavatar:list_post' %}">Publicaciones</a></li>
         <li><a href="#challenges" {% if not user.is_authenticated %}onclick="redirectToLogin(event)"{% endif %}>Desafíos</a></li>
       </ul>
       <div class="navbar-actions">
@@ -48,11 +45,7 @@
           <a class="login-btn" href="{% url 'ecoavatar:login' %}">Iniciar Sesión</a>
         {% endif %}
       </div>
-    </nav>
-   
-    
-    
-    
+    </nav>    
 
     <!-- Encabezado -->
     <div class="header-content">
@@ -63,7 +56,12 @@
       </h2>
     </div>
 
+    <div>
+      <h2>Vemos como todo se desvirtua</h2>
+    </div>
+
     <!-- Lienzo del personaje -->
+    {% if user.is_authenticated %}
     <div class="caracter">
       <h1>Adán</h1>
       <canvas
@@ -85,6 +83,7 @@
 
       </div>
     </div>
+    {% endif %}
    
     <!-- Modal para completar desafío -->
     <div id="challengeModal" class="modal">

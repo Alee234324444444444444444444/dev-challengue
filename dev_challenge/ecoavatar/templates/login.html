@@ -71,14 +71,7 @@
         width: 100px;
         gap: 20px;
       }
-
-
-
-
     </style>
-    
-    
-  
   </head>
   <body>
     <!-- Barra de navegación -->
@@ -89,9 +82,9 @@
         </a>
       </div>
       <ul class="navbar-links">
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#publicaciones">Publicaciones</a></li>
-        <li><a href="#challenges">Desafíos</a></li>
+        <li><a href="{% url "ecoavatar:index" %}">Inicio</a></li>
+        <li><a href="{% url "ecoavatar:list_post" %}">Publicaciones</a></li>
+        <li><a href="{% url "ecoavatar:index" %}">Desafíos</a></li>
       </ul>
       <div class="navbar-actions">
         <button class="login-btn">Iniciar Sesión</button>

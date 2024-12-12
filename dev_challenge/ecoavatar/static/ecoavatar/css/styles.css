@@ -307,8 +307,8 @@ canvas {
   }
 
   .modal-content {
-    background-color: #151d26;
-    border: 1px solid #f9fafb;
+    background-color: yellowgreen;
+    border: 1px solid red;
     color: #f9fafb;
     margin: 15% auto;
     padding: 20px;

@@ -52,7 +52,7 @@
         <div class="op-post1" style="background-image: url('{{ post.photo.url }}')">
           <p>{{ post.description }}</p>
         </div>
-        <p><small>Publicado por {{ post.user.username }} el {{ post.created_at|date:"d M Y H:i" }}</small></p>
+        <p style="color: silver;"><small>Publicado por {{ post.user.user_name }} el {{ post.created_at|date:"d M Y H:i" }}</small></p>
       </div>
       {% empty %}
       <p>No hay publicaciones todavía.</p>
